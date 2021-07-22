@@ -161,11 +161,17 @@ const DetailPost = () => {
         <p className="mt-2 leading-none">{detailPost?.body}</p>
         <div className="flex mb-2 space-x-2">
           {detailPost?.images &&
-            detailPost?.images.map((img) => (
+            detailPost?.images.map((img, idx) => (
               <Modal
                 content={() => (
                   <div className="flex justify-center p-4">
-                    <img src={img.url} alt={img.url} className="object-cover" />
+                    <Image
+                      src={img.url}
+                      alt={img.url}
+                      height={300}
+                      width={300}
+                      className="object-cover"
+                    />
                   </div>
                 )}
               >
@@ -180,6 +186,7 @@ const DetailPost = () => {
                     }}
                     className="cursor-pointer"
                     title={`${detailPost?.userId?.username} image post`}
+                    key={idx}
                   />
                 )}
               </Modal>
@@ -237,7 +244,10 @@ const DetailPost = () => {
         </form>
         <div>
           {detailPost?.comments.map((comment) => (
-            <div className="flex items-center space-x-2 space-y-2">
+            <div
+              className="flex items-center space-x-2 space-y-2"
+              key={comment?._id}
+            >
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}/${comment?.userId.photo}`}
                 alt={comment?.userId.username}
