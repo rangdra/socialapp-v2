@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.my-dropdown-enter {
+  opacity: 0;
+}
+.my-dropdown-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.my-dropdown-exit {
+  opacity: 1;
+}
+.my-dropdown-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.modal-close {
+  @apply absolute right-0 inline-block cursor-pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.modal-close::before,
+.modal-close::after {
+  @apply absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 2px;
+  content: '';
+  background-color: black;
+  margin-left: -25%;
+}
+
+.modal-close::before {
+  transform: rotate(45deg);
+}
+.modal-close::after {
+  transform: rotate(-45deg);
+}
+
+.overlay {
+  @apply transition-all duration-500;
+}
+.overlay-enter {
+  opacity: 0;
+}
+.overlay-enter-active {
+  opacity: 1;
+}
+.overlay-exit {
+  opacity: 1;
+}
+.overlay-exit-active {
+  opacity: 0;
+}
+.overlay-enter-done {
+  opacity: 1;
+}
