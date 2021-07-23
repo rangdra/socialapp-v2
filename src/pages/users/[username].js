@@ -8,6 +8,7 @@ import axios from 'config/axios';
 import { useAuthContext } from 'context/AuthContext';
 import { toast } from 'react-toastify';
 import Layout from 'components/Layout';
+import { API_URL } from 'config/url';
 
 const UserPage = () => {
   const router = useRouter();
@@ -45,7 +46,7 @@ const UserPage = () => {
               <div
                 className="w-full h-[200px] bg-center bg-cover"
                 style={{
-                  backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${user?.banner}')`,
+                  backgroundImage: `url('${API_URL}/${user?.banner}')`,
                 }}
                 title="Banner"
               ></div>
@@ -63,7 +64,7 @@ const UserPage = () => {
                 <Image
                   src={
                     user?.photo
-                      ? `${process.env.NEXT_PUBLIC_API_URL}/${user.photo}`
+                      ? `${API_URL}/${user.photo}`
                       : '/images/default-photo.png'
                   }
                   alt={user?.fullname}

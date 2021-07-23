@@ -1,3 +1,4 @@
+import { API_URL } from 'config/url';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { IoMdMale, IoMdFemale } from 'react-icons/io';
@@ -20,7 +21,7 @@ const SidebarProfile = () => {
         <Image
           src={
             user?.photo
-              ? `${process.env.NEXT_PUBLIC_API_URL}/${user.photo}`
+              ? `${API_URL}/${user.photo}`
               : '/images/default-photo.png'
           }
           alt={user?.fullname}

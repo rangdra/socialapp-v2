@@ -1,6 +1,5 @@
 import useSWR, { mutate } from 'swr';
 import axios from 'config/axios';
-import { toast } from 'react-toastify';
 
 import { useAuthContext } from 'context/AuthContext';
 import Post from 'components/Post';

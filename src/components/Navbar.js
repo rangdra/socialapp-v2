@@ -9,6 +9,7 @@ import { useAuthContext } from 'context/AuthContext';
 import CreatePost from './CreatePost';
 import Modal from './Modal';
 import SearchBox from './SearchBox';
+import { API_URL } from 'config/url';
 
 const Navbar = () => {
   const {
@@ -51,7 +52,7 @@ const Navbar = () => {
                   <Image
                     src={`${
                       user?.photo
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/${user.photo}`
+                        ? `${API_URL}/${user.photo}`
                         : 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
                     }`}
                     alt={user?.fullname}

@@ -4,6 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuthContext } from 'context/AuthContext';
+import { API_URL } from 'config/url';
 
 const SearchBox = () => {
   const {
@@ -78,6 +79,7 @@ const SearchBox = () => {
           {searchResponse &&
             searchResponse.map((user) => (
               <Link
+                key={user._id}
                 href={`${
                   userLogin._id === user._id
                     ? '/users/me'
@@ -86,7 +88,8 @@ const SearchBox = () => {
               >
                 <a className="flex items-center p-2 space-x-2" key={user._id}>
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${user.photo}`}
+                    src={`${API_URL}/${user.photo}`}
+                    alt={user.photo}
                     width={36}
                     height={36}
                     className="rounded-full"

@@ -11,6 +11,7 @@ import Modal from 'components/Modal';
 import EditProfile from 'components/EditProfile';
 import { MdLocationOn } from 'react-icons/md';
 import { useRouter } from 'next/router';
+import { API_URL } from 'config/url';
 
 const UserProfile = () => {
   const router = useRouter();
@@ -81,7 +82,7 @@ const UserProfile = () => {
                 className="w-full h-[200px] cursor-pointer bg-center bg-cover"
                 onClick={() => openFileInput('banner')}
                 style={{
-                  backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}/${user?.banner}')`,
+                  backgroundImage: `url('${API_URL}/${user?.banner}')`,
                 }}
                 title="You can change banner"
               ></div>
@@ -103,7 +104,7 @@ const UserProfile = () => {
                 <Image
                   src={
                     user?.photo
-                      ? `${process.env.NEXT_PUBLIC_API_URL}/${user.photo}`
+                      ? `${API_URL}/${user.photo}`
                       : '/images/default-photo.png'
                   }
                   alt={user?.fullname}

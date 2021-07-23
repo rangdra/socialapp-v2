@@ -16,6 +16,7 @@ import axios from 'config/axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Layout from 'components/Layout';
+import { API_URL } from 'config/url';
 
 dayjs.extend(relativeTime);
 
@@ -86,7 +87,7 @@ const DetailPost = () => {
               <Image
                 src={
                   detailPost?.userId?.photo
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/${detailPost?.userId?.photo}`
+                    ? `${API_URL}/${detailPost?.userId?.photo}`
                     : '/images/default-photo.png'
                 }
                 alt={detailPost?.userId?.fullname}
@@ -163,6 +164,7 @@ const DetailPost = () => {
           {detailPost?.images &&
             detailPost?.images.map((img, idx) => (
               <Modal
+                key={idx}
                 content={() => (
                   <div className="flex justify-center p-4">
                     <Image
@@ -178,6 +180,7 @@ const DetailPost = () => {
                 {(toggle) => (
                   <Image
                     src={img.url}
+                    alt={img.url}
                     height={80}
                     width={80}
                     key={img.url}
@@ -186,7 +189,6 @@ const DetailPost = () => {
                     }}
                     className="cursor-pointer"
                     title={`${detailPost?.userId?.username} image post`}
-                    key={idx}
                   />
                 )}
               </Modal>
@@ -249,7 +251,7 @@ const DetailPost = () => {
               key={comment?._id}
             >
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_URL}/${comment?.userId.photo}`}
+                src={`${API_URL}/${comment?.userId.photo}`}
                 alt={comment?.userId.username}
                 width={32}
                 height={32}

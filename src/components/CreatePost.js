@@ -2,6 +2,7 @@ import axios from 'config/axios';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import useSWR, { mutate } from 'swr';
+import Image from 'next/image';
 
 import uploadImageMulti from 'utils/uploadImageMulti';
 
@@ -11,7 +12,7 @@ const CreatePost = ({ setDisplay, postId }) => {
   const [images, setImages] = useState([]);
   const { data, revalidate } = useSWR('/posts');
   const post = postId ? data?.posts.find((p) => p._id === postId) : null;
-
+  let arr = [];
   useEffect(() => {
     if (post) {
       setBody(post.body);
@@ -19,6 +20,19 @@ const CreatePost = ({ setDisplay, postId }) => {
     }
   }, [post]);
 
+  // useEffect(() => {
+  //   if (images.length > 0) {
+  //     images.map((image) => {
+  //       let file = `/${image.name}`;
+  //       const blob = new Blob([file], { type: 'image/png' });
+  //       const img = URL.createObjectURL(blob);
+
+  //       arr.push(img);
+  //     });
+  //     setImages(arr); // after component is mount, src will change
+  //   }
+  // }, []);
+  // console.log(arr);
   const deleteImage = (index) => {
     const newArr = [...images];
     newArr.splice(index, 1);
@@ -99,6 +113,7 @@ const CreatePost = ({ setDisplay, postId }) => {
       }
     }
   };
+
   return (
     <>
       <div className="p-8">
@@ -144,7 +159,7 @@ const CreatePost = ({ setDisplay, postId }) => {
               className="mb-2"
             />
 
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               {images &&
                 images.map((img, index) => (
                   <div key={index} className="relative flex items-center mr-2">
@@ -152,6 +167,12 @@ const CreatePost = ({ setDisplay, postId }) => {
                       src={img.url ? img.url : URL.createObjectURL(img)}
                       alt=""
                       className="object-cover h-24"
+                    />
+                    <Image
+                      src={img.url ? img.url : img}
+                      alt="images"
+                      width={70}
+                      height={96}
                     />
 
                     <span
@@ -162,7 +183,7 @@ const CreatePost = ({ setDisplay, postId }) => {
                     </span>
                   </div>
                 ))}
-            </div>
+            </div> */}
           </div>
           <button
             type="submit"

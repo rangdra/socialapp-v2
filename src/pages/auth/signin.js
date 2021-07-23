@@ -32,7 +32,7 @@ const SignIn = () => {
   return (
     <>
       <Head>
-        <title>Register</title>
+        <title>Login</title>
       </Head>
       <div className="flex">
         <div className="w-5/12">

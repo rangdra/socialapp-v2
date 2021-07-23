@@ -9,6 +9,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Modal from './Modal';
 import CreatePost from './CreatePost';
 import { useAuthContext } from 'context/AuthContext';
+import { API_URL } from 'config/url';
 
 dayjs.extend(relativeTime);
 
@@ -31,7 +32,7 @@ const Post = ({ post, likePost, deletePost }) => {
             <Image
               src={
                 post?.userId?.photo
-                  ? `${process.env.NEXT_PUBLIC_API_URL}/${post?.userId?.photo}`
+                  ? `${API_URL}/${post?.userId?.photo}`
                   : '/images/default-photo.png'
               }
               alt={post?.userId?.fullname}
@@ -101,17 +102,21 @@ const Post = ({ post, likePost, deletePost }) => {
       <p className="mt-1">{post.body}</p>
       <div className="flex mb-2 space-x-2">
         {post?.images &&
-          post?.images.map((img) => (
+          post?.images.map((img, idx) => (
             <Modal
+              key={idx}
               content={() => (
                 <div className="flex justify-center p-4">
-                  <img src={img.url} alt={img.url} className="object-cover" />
+                  {/* <img src={img.url} alt={img.url} className="object-cover" /> */}
+
+                  <Image src={img.url} alt={img.url} width={400} height={400} />
                 </div>
               )}
             >
               {(toggle) => (
                 <Image
                   src={img.url}
+                  alt={img.url}
                   height={80}
                   width={80}
                   key={img.url}
