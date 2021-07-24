@@ -6,6 +6,9 @@ import { SWRConfig } from 'swr';
 
 import { AuthProvider } from 'context/AuthContext';
 import axios from 'config/axios';
+import axiosDev from 'axios';
+
+axiosDev.defaults.withCredentials = true;
 
 const fetcher = async (url) => {
   try {
