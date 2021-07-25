@@ -1,4 +1,6 @@
 import axios from 'config/axios';
+import axiosDev from 'axios';
+
 import Image from 'next/image';
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import useSWR from 'swr';
@@ -66,6 +68,33 @@ const UserProfile = () => {
     }
   };
 
+  const uploadImageCloud = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'social_app');
+    formData.append('cloud_name', 'rangdra');
+
+    try {
+      const { data } = await axiosDev.post(
+        'https://api.cloudinary.com/v1_1/rangdra/image/upload',
+        formData
+      );
+
+      if (fileInputRef.current.name === 'photo') {
+        await axios.put(`/users/${user?._id}/images`, {
+          photo: data.secure_url,
+        });
+      } else if (fileInputRef.current.name === 'banner') {
+        await axios.put(`/users/${user?._id}/images`, {
+          banner: data.secure_url,
+        });
+      }
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Layout title="My Profile">
       <div className="px-20 my-12 ">
@@ -75,14 +104,14 @@ const UserProfile = () => {
               type="file"
               hidden={true}
               ref={fileInputRef}
-              onChange={uploadImage}
+              onChange={uploadImageCloud}
             />
             {user?.banner ? (
               <div
                 className="w-full h-[200px] cursor-pointer bg-center bg-cover"
                 onClick={() => openFileInput('banner')}
                 style={{
-                  backgroundImage: `url('${API_URL}/${user?.banner}')`,
+                  backgroundImage: `url('${user?.banner}')`,
                 }}
                 title="You can change banner"
               ></div>
@@ -102,11 +131,7 @@ const UserProfile = () => {
                 onClick={() => openFileInput('photo')}
               >
                 <Image
-                  src={
-                    user?.photo
-                      ? `${API_URL}/${user.photo}`
-                      : '/images/default-photo.png'
-                  }
+                  src={user?.photo ? user.photo : '/images/default-photo.png'}
                   alt={user?.fullname}
                   width={72}
                   height={72}

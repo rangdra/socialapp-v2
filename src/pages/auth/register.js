@@ -23,22 +23,25 @@ const Register = () => {
     username: '',
     email: '',
     password: '',
+    gender: '',
   });
-  const [gender, setGender] = useState('');
+
   const router = useRouter();
   if (authenticated) {
     router.push('/');
   }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = { ...data, gender };
+    // console.log(data);
 
-    register(newUser);
+    register(data);
   };
 
   return (
@@ -47,62 +50,72 @@ const Register = () => {
         <title>Register</title>
       </Head>
       <div className="flex">
-        <div className="w-5/12">
+        <div className="w-full sm:w-5/12">
           <div
             className="w-full h-screen bg-center bg-cover"
             style={{ backgroundImage: "url('/images/background.jpg'" }}
           ></div>
         </div>
-        <div className="w-7/12 h-screen p-4">
-          <p className="text-sm text-right text-gray-400">
+        <div className="absolute w-full h-screen p-4 sm:static sm:w-7/12">
+          <p className="text-sm text-right text-white sm:text-gray-400">
             Already have an account?
             <Link href="/auth/signin">
-              <a className="ml-2 text-blue-500 underline">Sign In</a>
+              <a className="ml-2 text-blue-400 underline sm:text-blue-500">
+                Sign In
+              </a>
             </Link>
           </p>
-          <div className="flex justify-center mt-20">
-            <form className="w-1/2" onSubmit={handleSubmit}>
+          <div className="flex justify-center mt-8 sm:mt-20">
+            <form
+              className="w-full p-4 bg-white rounded sm:bg-transparent sm:p-0 sm:w-1/2 sm:rounded-none"
+              onSubmit={handleSubmit}
+            >
               <h1 className="text-3xl font-semibold text-center text-indigo-900">
                 Register Now!
               </h1>
-              <p className="mt-2 mb-4 text-sm font-medium text-center text-gray-400">
+              <p className="mb-4 text-sm font-medium text-center text-gray-400 sm:mt-2">
                 Let&apos;s create your account
               </p>
-              <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-                <FaUserTag className="w-5 h-5 mr-4 text-gray-600" />
+              <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+                <FaUserTag className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
                 <input
                   type="text"
                   name="fullname"
-                  className="text-gray-600 bg-transparent focus:outline-none"
+                  value={data.fullname}
+                  className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
                   placeholder="Fullname"
                   style={{ flex: 1 }}
                   onChange={handleChange}
                 />
               </div>{' '}
-              <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-                <FaUserAlt className="w-5 h-5 mr-4 text-gray-600" />
+              <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+                <FaUserAlt className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
                 <input
                   type="text"
                   name="username"
-                  className="text-gray-600 bg-transparent focus:outline-none"
+                  value={data.username}
+                  className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
                   placeholder="Username"
                   style={{ flex: 1 }}
                   onChange={handleChange}
                 />
               </div>
-              <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-                <FaEnvelope className="w-5 h-5 mr-4 text-gray-600" />
+              <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+                <FaEnvelope className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
                 <input
                   type="email"
                   name="email"
-                  className="text-gray-600 bg-transparent focus:outline-none"
+                  value={data.email}
+                  className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
                   placeholder="Email"
                   style={{ flex: 1 }}
                   onChange={handleChange}
                 />
               </div>
-              <div className="mb-4 text-gray-600">
-                <label className="block ">Jenis Kelamin</label>
+              <div className="text-gray-600">
+                <label className="block text-sm sm:text-base">
+                  Jenis Kelamin
+                </label>
                 <span className="mr-2">
                   <input
                     type="radio"
@@ -110,9 +123,14 @@ const Register = () => {
                     name="jenkel"
                     id="male"
                     value="male"
-                    onChange={(e) => e.target.checked && setGender('male')}
+                    onChange={(e) =>
+                      e.target.checked &&
+                      setData({ ...data, gender: e.target.value })
+                    }
                   />
-                  <label htmlFor="male">Pria</label>
+                  <label htmlFor="male" className="text-xs sm:text-base">
+                    Pria
+                  </label>
                 </span>
                 <span className="mr-2">
                   <input
@@ -121,26 +139,32 @@ const Register = () => {
                     name="jenkel"
                     id="female"
                     value="female"
-                    onChange={(e) => e.target.checked && setGender('female')}
+                    onChange={(e) =>
+                      e.target.checked &&
+                      setData({ ...data, gender: e.target.value })
+                    }
                   />
-                  <label htmlFor="female">Perempuan</label>
+                  <label htmlFor="female" className="text-xs sm:text-base">
+                    Perempuan
+                  </label>
                 </span>
               </div>
-              <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-                <FaLock className="w-5 h-5 mr-4 text-gray-600" />
+              <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+                <FaLock className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
                 <input
                   type={`${showPassword ? 'text' : 'password'}`}
                   name="password"
-                  className="text-gray-600 bg-transparent focus:outline-none"
+                  value={data.password}
+                  className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
                   placeholder="Password"
                   style={{ flex: 1 }}
                   onChange={handleChange}
                 />
                 <div onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
-                    <FaEyeSlash className="w-5 h-5 ml-4 text-gray-600 cursor-pointer" />
+                    <FaEyeSlash className="w-3 h-3 ml-2 text-gray-600 sm:w-5 sm:h-5 sm:ml-4" />
                   ) : (
-                    <FaEye className="w-5 h-5 ml-4 text-gray-600 cursor-pointer" />
+                    <FaEye className="w-3 h-3 ml-2 text-gray-600 sm:w-5 sm:h-5 sm:ml-4" />
                   )}
                 </div>
               </div>
