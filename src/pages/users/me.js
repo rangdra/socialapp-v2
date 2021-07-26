@@ -13,7 +13,6 @@ import Modal from 'components/Modal';
 import EditProfile from 'components/EditProfile';
 import { MdLocationOn } from 'react-icons/md';
 import { useRouter } from 'next/router';
-import { API_URL } from 'config/url';
 
 const UserProfile = () => {
   const router = useRouter();

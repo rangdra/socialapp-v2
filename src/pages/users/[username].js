@@ -8,7 +8,7 @@ import axios from 'config/axios';
 import { useAuthContext } from 'context/AuthContext';
 import { toast } from 'react-toastify';
 import Layout from 'components/Layout';
-import { API_URL } from 'config/url';
+import { MdLocationOn } from 'react-icons/md';
 
 const UserPage = () => {
   const router = useRouter();
