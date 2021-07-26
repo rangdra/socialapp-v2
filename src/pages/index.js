@@ -37,8 +37,8 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="grid grid-cols-7 gap-4 px-20 mt-12">
-        <div className="w-full bg-white h-[250px] col-span-2 p-4 text-gray-800 shadow-lg">
+      <div className="grid-cols-7 gap-4 px-4 mt-8 sm:grid sm:px-20 sm:mt-12">
+        <div className="w-full sm:mb-0 mb-4 bg-white sm:h-[230px] col-span-2 p-4 text-gray-800 shadow-lg">
           {authenticated ? (
             <SidebarProfile />
           ) : (
@@ -54,8 +54,10 @@ export default function Home() {
         </div>
 
         <div className="w-full col-span-3 p-4 text-gray-800 bg-white shadow-lg">
-          <section className="mt-4 text-gray-800 posts">
-            <h1 className="mb-4 text-2xl font-bold tracking-wider">Posts</h1>
+          <section className="text-gray-800 posts">
+            <h1 className="mb-2 text-xl font-bold tracking-wider sm:text-2xl">
+              Posts
+            </h1>
             {posts?.length > 0 ? (
               posts?.map((post) => (
                 <Post

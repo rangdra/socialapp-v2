@@ -52,21 +52,21 @@ const UserProfile = () => {
     }
   };
 
-  const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('type', fileInputRef.current.name);
+  // const uploadImage = async (e) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('image', file);
+  //   formData.append('type', fileInputRef.current.name);
 
-    try {
-      await axios.put(`/users/${user._id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     await axios.put(`/users/${user._id}`, formData, {
+  //       headers: { 'Content-Type': 'multipart/form-data' },
+  //     });
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const uploadImageCloud = async (e) => {
     const file = e.target.files[0];
@@ -97,9 +97,9 @@ const UserProfile = () => {
   };
   return (
     <Layout title="My Profile">
-      <div className="px-20 my-12 ">
+      <div className="px-4 py-8 sm:my-12 sm:px-20">
         <div className="flex flex-col items-center">
-          <div className="w-1/2 bg-white rounded shadow">
+          <div className="w-full bg-white rounded shadow sm:w-1/2">
             <input
               type="file"
               hidden={true}
@@ -139,7 +139,7 @@ const UserProfile = () => {
                   title="You can change photo"
                 />
               </div>
-              <h2 className="relative block mt-12 text-2xl font-bold">
+              <h2 className="relative block mt-12 text-xl font-semibold cursor-pointer sm:text-2xl">
                 {user?.fullname}
                 {user?.gender === 'male' ? (
                   <IoMdMale className="absolute text-xs text-blue-500 -right-4 top-2" />
@@ -155,7 +155,7 @@ const UserProfile = () => {
                   <span>{user?.address}</span>
                 </div>
               )}
-              <div className="flex items-center justify-between mt-1 space-x-4">
+              <div className="flex items-center justify-between mt-1 space-x-4 text-sm sm:text-base">
                 <div>
                   <p className="text-center">{data?.myPosts.length}</p>
                   <p>Posts</p>
@@ -177,7 +177,7 @@ const UserProfile = () => {
                 {(toggle) => (
                   <button
                     onClick={() => toggle()}
-                    className="w-1/2 py-2 mx-auto mt-4 font-semibold text-white transition-all duration-200 bg-indigo-500 rounded hover:bg-indigo-600"
+                    className="w-1/2 py-2 mx-auto mt-4 text-sm font-semibold text-white transition-all duration-200 bg-indigo-500 rounded sm:text-base hover:bg-indigo-600"
                   >
                     Edit Profile
                   </button>
@@ -187,7 +187,7 @@ const UserProfile = () => {
             <div className="mt-4 mb-2 border border-gray-800"></div>
             <div className="border border-gray-800 "></div>
             <section className="p-4 text-gray-800 posts">
-              <h1 className="mb-4 text-2xl font-bold tracking-wider">
+              <h1 className="mb-2 text-xl font-bold tracking-wider sm:text-2xl">
                 My Posts
               </h1>
               {data?.myPosts.length > 0 ? (

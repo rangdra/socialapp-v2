@@ -32,7 +32,7 @@ const Post = ({ post, likePost, deletePost }) => {
             <Image
               src={
                 post?.userId?.photo
-                  ? `${API_URL}/${post?.userId?.photo}`
+                  ? post?.userId?.photo
                   : '/images/default-photo.png'
               }
               alt={post?.userId?.fullname}
@@ -41,15 +41,17 @@ const Post = ({ post, likePost, deletePost }) => {
               className="rounded-full "
             />
             <div>
-              <p className="text-sm font-bold leading-none">
+              <p className="text-xs font-semibold leading-none sm:text-sm">
                 {post?.userId?.fullname}
               </p>
-              <p className="text-xs text-gray-400">@{post?.userId?.username}</p>
+              <p className="text-[10px] sm:text-xs text-gray-400">
+                @{post?.userId?.username}
+              </p>
             </div>
           </a>
         </Link>
         {authenticated && post?.userId?._id === user?._id && (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             <Modal
               content={(toggle, setDisplay) => (
                 <CreatePost setDisplay={setDisplay} postId={post?._id} />
@@ -57,7 +59,7 @@ const Post = ({ post, likePost, deletePost }) => {
             >
               {(toggle) => (
                 <FaEdit
-                  className="w-4 h-4 text-yellow-500 cursor-pointer"
+                  className="text-sm text-yellow-500 cursor-pointer sm:text-base"
                   title="Edit post"
                   onClick={() => {
                     toggle();
@@ -90,7 +92,7 @@ const Post = ({ post, likePost, deletePost }) => {
             >
               {(toggle) => (
                 <FaTrash
-                  className="w-4 h-4 text-red-500 cursor-pointer hover:opacity-50"
+                  className="text-sm text-red-500 cursor-pointer sm:text-base hover:opacity-50"
                   title="Delete post"
                   onClick={() => toggle()}
                 />
@@ -100,7 +102,7 @@ const Post = ({ post, likePost, deletePost }) => {
         )}
       </div>
       <p className="mt-1">{post.body}</p>
-      <div className="flex mb-2 space-x-2">
+      <div className="flex my-1 space-x-2">
         {post?.images &&
           post?.images.map((img, idx) => (
             <Modal
@@ -131,7 +133,7 @@ const Post = ({ post, likePost, deletePost }) => {
           ))}
       </div>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 text-xs sm:text-sm">
         <div
           className="flex items-center cursor-pointer"
           onClick={() => likePost(post?._id)}
@@ -139,23 +141,25 @@ const Post = ({ post, likePost, deletePost }) => {
           {post?.likeId.includes(user?._id) ? (
             <>
               <AiFillLike className="w-4 h-4 mr-1 text-blue-500" />
-              <span className="text-sm">{post.likeId.length} Unlike</span>
+              <span>{post.likeId.length} Unlike</span>
             </>
           ) : (
             <>
               <AiOutlineLike className="w-4 h-4 mr-1 text-blue-500" />
-              <span className="text-sm">{post.likeId.length} like</span>
+              <span>{post.likeId.length} like</span>
             </>
           )}
         </div>
         <Link href={`/posts/${post?._id}`}>
           <a className="flex items-center">
             <BiCommentDetail className="w-4 h-4 mr-1" />
-            <span className="text-sm">{post.comments.length} comments</span>
+            <span>{post.comments.length} comments</span>
           </a>
         </Link>
       </div>
-      <span className="text-xs">{dayjs(post.createdAt).fromNow()}</span>
+      <span className="text-[10px] sm:text-xs">
+        {dayjs(post.createdAt).fromNow()}
+      </span>
     </div>
   );
 };

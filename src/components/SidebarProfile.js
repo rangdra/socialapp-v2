@@ -19,11 +19,7 @@ const SidebarProfile = () => {
         onClick={() => router.push('/users/me')}
       >
         <Image
-          src={
-            user?.photo
-              ? `${API_URL}/${user.photo}`
-              : '/images/default-photo.png'
-          }
+          src={user?.photo ? user.photo : '/images/default-photo.png'}
           alt={user?.fullname}
           width={72}
           height={72}
@@ -31,7 +27,7 @@ const SidebarProfile = () => {
         />
       </div>
       <h2
-        className="relative block mt-1 text-2xl font-bold cursor-pointer"
+        className="relative block mt-1 text-xl font-semibold cursor-pointer sm:text-2xl"
         onClick={() => router.push('/users/me')}
       >
         {user?.fullname}
@@ -44,7 +40,7 @@ const SidebarProfile = () => {
 
       <h3 className="text-sm text-gray-400">@{user?.username}</h3>
       {user?.bio && <p>{user?.bio}</p>}
-      <div className="flex items-center justify-between mt-1 space-x-4">
+      <div className="flex items-center justify-between mt-1 space-x-4 text-sm sm:text-base">
         <div>
           <p className="text-center">{myPosts?.length}</p>
           <p>Posts</p>

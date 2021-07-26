@@ -116,18 +116,18 @@ const CreatePost = ({ setDisplay, postId }) => {
 
   return (
     <>
-      <div className="p-8">
-        <h1 className="text-3xl font-extrabold text-center text-gray-700">
+      <div className="p-4 sm:p-8">
+        <h1 className="text-2xl font-extrabold text-center text-gray-700 sm:text-3xl">
           {postId ? 'Edit Post' : 'Create Post'}
         </h1>
         {loading && <p className="text-center">Loading...</p>}
         <div className="relative flex items-center justify-center w-full"></div>
 
-        <form onSubmit={handleSubmit} className="mt-8">
+        <form onSubmit={handleSubmit} className="sm:mt-4">
           <div className="mb-2">
             <label
               htmlFor="body"
-              className="block mb-2 text-lg font-bold text-gray-600"
+              className="block mb-1 text-sm text-gray-600 sm:text-lg sm:mb-2"
             >
               Body
             </label>
@@ -140,13 +140,10 @@ const CreatePost = ({ setDisplay, postId }) => {
               className="w-full px-2 py-3 transition-all duration-200 border border-indigo-800 rounded-md shadow-lg focus:outline-none focus:ring focus:ring-indigo-500 focus:ring-opacity-50 "
             ></textarea>
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="body"
-              className="block mb-2 text-lg font-bold text-gray-600"
-            >
+          <div className="mb-2 sm:mb-4">
+            <label htmlFor="body" className="block mb-2 text-sm text-gray-600">
               Add a picture
-              <span className="text-xs italic font-thin text-red-600">
+              <span className="text-[10px] sm:text-xs italic font-thin text-red-600">
                 *Maks 5 photos
               </span>
             </label>
@@ -187,7 +184,7 @@ const CreatePost = ({ setDisplay, postId }) => {
           </div>
           <button
             type="submit"
-            className="px-4 py-2 font-bold text-white transition-all duration-200 bg-indigo-500 hover:bg-indigo-600 focus:outline-none"
+            className="px-4 py-2 text-sm font-semibold text-white transition-all duration-200 bg-indigo-500 sm:text-base hover:bg-indigo-600 focus:outline-none"
           >
             Submit
           </button>

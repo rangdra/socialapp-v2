@@ -56,14 +56,14 @@ const SearchBox = () => {
   return (
     <div
       ref={selectWrapper}
-      className="flex relative items-center w-[400px] py-2 px-4 space-x-2 bg-white rounded-full"
+      className="flex relative items-center w-full sm:w-[400px] py-2 px-4 space-x-2 bg-white rounded-full"
     >
-      <FaSearch className="w-5 h-5 text-gray-400" />
+      <FaSearch className="w-3 h-3 text-gray-400 sm:w-5 sm:h-5" />
       <input
         type="text"
         value={keyword}
         onChange={handleSearch}
-        className="text-gray-400 bg-transparent focus:outline-none"
+        className="text-sm text-gray-400 bg-transparent sm:text-base focus:outline-none"
         style={{ flex: 1 }}
         onFocus={() => setSearchFocus(!searchFocus)}
         onBlur={() => setSearchFocus(!searchFocus)}
@@ -74,7 +74,7 @@ const SearchBox = () => {
         }
       />
       {keyword.length >= 3 ? (
-        <div className="absolute right-0 w-full p-2 space-y-2 text-gray-800 divide-y-2 rounded shadow-lg bg-gray-50 top-10">
+        <div className="absolute right-0 z-50 w-full space-y-2 text-gray-800 divide-y-2 rounded shadow-lg sm:p-2 bg-gray-50 top-10">
           {loading && <p className="p-2 text-sm">Loading...</p>}
           {searchResponse &&
             searchResponse.map((user) => (
@@ -88,7 +88,7 @@ const SearchBox = () => {
               >
                 <a className="flex items-center p-2 space-x-2" key={user._id}>
                   <Image
-                    src={`${API_URL}/${user.photo}`}
+                    src={user.photo}
                     alt={user.photo}
                     width={36}
                     height={36}
@@ -96,7 +96,7 @@ const SearchBox = () => {
                   />
                   <div>
                     <p className="text-sm leading-none">{user.fullname}</p>
-                    <p className="text-xs">@{user.username}</p>
+                    <p className="text-xs text-gray-400">@{user.username}</p>
                   </div>
                 </a>
               </Link>

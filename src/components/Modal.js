@@ -72,7 +72,7 @@ export default function Modal(props) {
                   <div
                     style={props.modalStyle}
                     ref={modalRef}
-                    className="w-5/12 max-w-3xl bg-white shadow-2xl max-h-2xl"
+                    className="w-11/12 max-w-3xl bg-white shadow-2xl sm:w-5/12 max-h-2xl"
                   >
                     <div className="relative">
                       <span className="modal-close" onClick={toggle}></span>
