@@ -61,7 +61,7 @@ const Navbar = () => {
           <a className="flex items-center space-x-2 text-white logo">
             <FaEnvelope className="text-xl sm:text-4xl" />
             <span className="text-xl font-bold sm:tracking-wider sm:text-4xl">
-              RPApp
+              Social App
             </span>
           </a>
         </Link>

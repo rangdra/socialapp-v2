@@ -7,7 +7,7 @@ const Layout = ({ title, children }) => {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{title} | Social App</title>
       </Head>
       <Navbar />
 
@@ -17,7 +17,7 @@ const Layout = ({ title, children }) => {
 };
 
 Layout.defaultProps = {
-  title: 'Welcome To RPApp',
+  title: 'Welcome To Social App',
 };
 
 export default Layout;
