@@ -74,7 +74,7 @@ const DetailPost = () => {
   };
   return (
     <Layout title={`${detailPost?.userId?.username} detail post`}>
-      <div className="w-1/3 p-4 mx-auto my-12 bg-white shadow-lg">
+      <div className="w-11/12 p-4 mx-auto my-8 bg-white shadow-lg sm:my-12 sm:w-1/3">
         <div className="flex items-center justify-between">
           <Link
             href={`${
@@ -87,7 +87,7 @@ const DetailPost = () => {
               <Image
                 src={
                   detailPost?.userId?.photo
-                    ? `${API_URL}/${detailPost?.userId?.photo}`
+                    ? detailPost?.userId?.photo
                     : '/images/default-photo.png'
                 }
                 alt={detailPost?.userId?.fullname}
@@ -96,17 +96,17 @@ const DetailPost = () => {
                 className="rounded-full "
               />
               <div>
-                <p className="text-sm font-bold leading-none">
+                <p className="text-xs font-semibold leading-none sm:text-sm">
                   {detailPost?.userId?.fullname}
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-[10px] sm:text-xs text-gray-400">
                   @{detailPost?.userId?.username}
                 </p>
               </div>
             </a>
           </Link>
           {authenticated && detailPost?.userId?._id === user?._id && (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1">
               <Modal
                 content={(toggle, setDisplay) => (
                   <CreatePost
@@ -159,7 +159,7 @@ const DetailPost = () => {
             </div>
           )}
         </div>
-        <p className="mt-2 leading-none">{detailPost?.body}</p>
+        <p className="mt-1">{detailPost?.body}</p>
         <div className="flex mb-2 space-x-2">
           {detailPost?.images &&
             detailPost?.images.map((img, idx) => (
@@ -195,10 +195,10 @@ const DetailPost = () => {
             ))}
         </div>
 
-        <span className="text-xs">
+        <span className="text-[10px] sm:text-xs">
           {dayjs(detailPost?.createdAt).fromNow()}
         </span>
-        <div className="flex items-center py-2 my-2 space-x-4 border-t border-b border-gray-800">
+        <div className="flex items-center py-2 my-2 space-x-4 text-xs border-t border-b border-gray-800 sm:text-sm">
           <div
             className="flex items-center cursor-pointer"
             onClick={() => likePost(detailPost?._id)}
@@ -206,25 +206,19 @@ const DetailPost = () => {
             {detailPost?.likeId.includes(user?._id) ? (
               <>
                 <AiFillLike className="w-4 h-4 mr-1 text-blue-500" />
-                <span className="text-sm">
-                  {detailPost?.likeId.length} Unlike
-                </span>
+                <span>{detailPost?.likeId.length} Unlike</span>
               </>
             ) : (
               <>
                 <AiOutlineLike className="w-4 h-4 mr-1 text-blue-500" />
-                <span className="text-sm">
-                  {detailPost?.likeId.length} like
-                </span>
+                <span>{detailPost?.likeId.length} like</span>
               </>
             )}
           </div>
           <Link href={`/posts/${detailPost?._id}`}>
             <a className="flex items-center">
               <BiCommentDetail className="w-4 h-4 mr-1" />
-              <span className="text-sm">
-                {detailPost?.comments.length} comments
-              </span>
+              <span>{detailPost?.comments.length} comments</span>
             </a>
           </Link>
         </div>
@@ -236,7 +230,7 @@ const DetailPost = () => {
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="pl-2 border-b border-gray-400 focus:border-gray-800 focus:outline-none"
+            className="pl-2 text-sm border-b border-gray-400 sm:text-base focus:border-gray-800 focus:outline-none"
             style={{ flex: 1 }}
             placeholder="Tulis Komentar"
           />
@@ -251,7 +245,7 @@ const DetailPost = () => {
               key={comment?._id}
             >
               <Image
-                src={`${API_URL}/${comment?.userId.photo}`}
+                src={comment?.userId.photo}
                 alt={comment?.userId.username}
                 width={32}
                 height={32}
@@ -259,17 +253,17 @@ const DetailPost = () => {
               />
 
               <div>
-                <p className="text-sm font-bold leading-3">
+                <p className="text-sm font-semibold leading-3">
                   {comment?.userId.username}
-                  <span className="ml-2 text-sm font-normal">
+                  <span className="ml-1 text-sm font-normal">
                     {comment?.comment}
                   </span>
                 </p>
-                <p className="text-xs ">
+                <p className="sm:text-xs text-[10px]">
                   {dayjs(comment?.createdAt).fromNow()}
                   {user?._id === comment?.userId._id && (
                     <span
-                      className="ml-2 text-xs cursor-pointer"
+                      className="ml-1 text-xs text-red-500 cursor-pointer"
                       onClick={() =>
                         deleteComment(detailPost?._id, comment._id)
                       }

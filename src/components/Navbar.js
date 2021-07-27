@@ -17,6 +17,7 @@ const Navbar = () => {
     logout,
   } = useAuthContext();
   const selectWrapper = useRef(null);
+  const selectWrapper2 = useRef(null);
   const [isDropdown, setIsDropdown] = useState(false);
   const [isBtnAuth, setIsBtnAuth] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -24,6 +25,9 @@ const Navbar = () => {
   const clickOutside = (e) => {
     if (selectWrapper && !selectWrapper?.current?.contains(e.target)) {
       setIsDropdown(false);
+    }
+    if (selectWrapper2 && !selectWrapper2?.current?.contains(e.target)) {
+      setIsBtnAuth(false);
     }
   };
 
@@ -52,7 +56,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="flex items-center justify-between px-2 py-4 bg-indigo-500 sm:px-12">
+      <header className="flex items-center justify-between px-4 py-4 bg-indigo-500 sm:px-12">
         <Link href="/">
           <a className="flex items-center space-x-2 text-white logo">
             <FaEnvelope className="text-xl sm:text-4xl" />
@@ -100,13 +104,13 @@ const Navbar = () => {
                 >
                   <div className="absolute right-2 sm:right-0 z-10 w-[120px] bg-white divide-y divide-indigo-900 rounded shadow-lg top-9 sm:top-11">
                     <Link href="/users/me">
-                      <a className="block p-2 transition-all duration-200 hover:text-gray-400 hover:rounded-tl hover:rounded-tr">
+                      <a className="block p-2 text-sm transition-all duration-200 sm:text-base hover:text-gray-400 hover:rounded-tl hover:rounded-tr">
                         My Profile
                       </a>
                     </Link>
                     <div
                       onClick={() => logout()}
-                      className="p-2 transition-all duration-200 hover:text-gray-400"
+                      className="p-2 text-sm transition-all duration-200 sm:text-base hover:text-gray-400"
                     >
                       Logout
                     </div>
@@ -155,14 +159,17 @@ const Navbar = () => {
                 classNames="my-dropdown"
                 unmountOnExit
               >
-                <div className="absolute right-2 z-10 w-[120px] bg-white divide-y divide-indigo-900 rounded shadow-lg top-11">
+                <div
+                  className="absolute right-2 z-10 w-[120px] bg-white divide-y divide-indigo-900 rounded shadow-lg top-11"
+                  ref={selectWrapper2}
+                >
                   <Link href="/auth/signin">
-                    <a className="block p-2 transition-all duration-200 hover:text-gray-400 hover:rounded-tl hover:rounded-tr">
+                    <a className="block p-2 text-sm transition-all duration-200 sm:text-base hover:text-gray-400 hover:rounded-tl hover:rounded-tr">
                       Sign In
                     </a>
                   </Link>
                   <Link href="/auth/register">
-                    <a className="block p-2 transition-all duration-200 hover:text-gray-400 hover:rounded-tl hover:rounded-tr">
+                    <a className="block p-2 text-sm transition-all duration-200 sm:text-base hover:text-gray-400 hover:rounded-tl hover:rounded-tr">
                       Register
                     </a>
                   </Link>
@@ -172,7 +179,7 @@ const Navbar = () => {
           )}
         </div>
       </header>
-      <div className="flex flex-col px-2 py-4 space-y-2 overflow-hidden bg-indigo-300 sm:items-end sm:px-16">
+      <div className="flex flex-col p-4 space-y-2 overflow-hidden bg-indigo-300 sm:items-end sm:px-16">
         <SearchBox />
         <div className="w-1/2">
           {isMobile && (

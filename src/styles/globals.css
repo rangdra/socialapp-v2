@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.search-box {
+  z-index: 999;
+}
 .my-dropdown-enter {
   opacity: 0;
 }

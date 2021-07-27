@@ -78,11 +78,13 @@ const UserPage = () => {
                   <IoMdFemale className="text-xs text-pink-500" />
                 )}
               </h2>
-              <h3 className="text-sm text-gray-400">@{user?.username}</h3>
-              {user?.bio && <p className="my-2 text-sm">{user?.bio}</p>}
+              <h3 className="text-xs text-gray-400 sm:text-sm">
+                @{user?.username}
+              </h3>
+              {user?.bio && <p className="my-1 text-sm">{user?.bio}</p>}
               {user?.address && (
-                <div className="flex">
-                  <MdLocationOn className="w-5 h-5 mr-1 text-gray-600" />
+                <div className="flex items-center sm:text-xl">
+                  <MdLocationOn className="mr-1 text-gray-600" />
                   <span>{user?.address}</span>
                 </div>
               )}

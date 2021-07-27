@@ -74,21 +74,23 @@ const SearchBox = () => {
         }
       />
       {keyword.length >= 3 ? (
-        <div className="absolute right-0 z-50 w-full space-y-2 text-gray-800 divide-y-2 rounded shadow-lg sm:p-2 bg-gray-50 top-10">
+        <div className="absolute right-0 w-full space-y-2 text-gray-800 divide-y-2 rounded shadow-lg bg-gray-50 sm:p-2 top-10">
           {loading && <p className="p-2 text-sm">Loading...</p>}
           {searchResponse &&
             searchResponse.map((user) => (
               <Link
                 key={user._id}
                 href={`${
-                  userLogin._id === user._id
-                    ? '/users/me'
+                  userLogin
+                    ? userLogin._id === user._id
+                      ? '/users/me'
+                      : `/users/${user.username}`
                     : `/users/${user.username}`
                 }`}
               >
-                <a className="flex items-center p-2 space-x-2" key={user._id}>
+                <a className="flex items-center p-2 space-x-2 " key={user._id}>
                   <Image
-                    src={user.photo}
+                    src={user?.photo ? user.photo : '/images/default-photo.png'}
                     alt={user.photo}
                     width={36}
                     height={36}

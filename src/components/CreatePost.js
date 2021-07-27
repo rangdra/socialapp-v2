@@ -121,7 +121,7 @@ const CreatePost = ({ setDisplay, postId }) => {
           {postId ? 'Edit Post' : 'Create Post'}
         </h1>
         {loading && <p className="text-center">Loading...</p>}
-        <div className="relative flex items-center justify-center w-full"></div>
+        {/* <div className="relative flex items-center justify-center w-full"></div> */}
 
         <form onSubmit={handleSubmit} className="sm:mt-4">
           <div className="mb-2">

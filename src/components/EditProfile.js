@@ -26,13 +26,12 @@ const EditProfile = ({ setDisplay }) => {
     address: '',
     bio: '',
     password: '',
+    gender: '',
   });
-  const [gender, setGender] = useState('');
 
   useEffect(() => {
     if (userLogin) {
       setDataEdit({
-        ...dataEdit,
         fullname: userLogin?.fullname,
         username: userLogin?.username,
         email: userLogin?.email,
@@ -50,109 +49,116 @@ const EditProfile = ({ setDisplay }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const updateUser = { ...dataEdit, gender };
-
-      await axios.put(`/users/${userLogin?._id}`, updateUser);
+      await axios.put(`/users/${userLogin?._id}`, dataEdit);
       window.location.reload();
+      console.log(dataEdit);
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
   return (
-    <div className="p-8 text-gray-800">
-      <h1 className="text-3xl font-extrabold text-center">Edit Profile</h1>
-      <form className="px-12 mt-4" onSubmit={handleSubmit}>
-        <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-          <FaUserTag className="w-5 h-5 mr-4 text-gray-600" />
+    <div className="p-4 text-gray-800 sm:p-8">
+      <h1 className="text-2xl font-extrabold text-center text-gray-700 sm:text-3xl">
+        Edit Profile
+      </h1>
+      <form className="px-2 mt-2 sm:px-12 sm:mt-4" onSubmit={handleSubmit}>
+        <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+          <FaUserTag className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
           <input
             type="text"
             name="fullname"
-            className="text-gray-600 bg-transparent focus:outline-none"
+            className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
             placeholder="Fullname"
             value={dataEdit.fullname}
             style={{ flex: 1 }}
             onChange={handleChange}
           />
         </div>{' '}
-        <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg ">
-          <FaUserAlt className="w-5 h-5 mr-4" />
+        <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+          <FaUserAlt className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
           <input
             type="text"
             name="username"
             value={dataEdit.username}
-            className="text-gray-600 bg-transparent focus:outline-none"
+            className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
             placeholder="Username"
             style={{ flex: 1 }}
             onChange={handleChange}
           />
         </div>
-        <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-          <FaEnvelope className="w-5 h-5 mr-4 text-gray-600" />
+        <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+          <FaEnvelope className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
           <input
             type="email"
             name="email"
             value={dataEdit.email}
-            className="text-gray-600 bg-transparent focus:outline-none"
+            className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
             placeholder="Email"
             style={{ flex: 1 }}
             onChange={handleChange}
           />
         </div>
-        <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-          <MdLocationOn className="w-5 h-5 mr-4 text-gray-600" />
+        <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+          <MdLocationOn className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
           <input
             type="text"
             name="address"
             value={dataEdit.address}
-            className="text-gray-600 bg-transparent focus:outline-none"
+            className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
             placeholder="Address"
             style={{ flex: 1 }}
             onChange={handleChange}
           />
         </div>
-        <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-          <FaBookOpen className="w-5 h-5 mr-4 text-gray-600" />
+        <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+          <FaBookOpen className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
           <input
             type="text"
             name="bio"
             value={dataEdit.bio}
-            className="text-gray-600 bg-transparent focus:outline-none"
+            className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
             placeholder="Bio"
             style={{ flex: 1 }}
             onChange={handleChange}
           />
         </div>
         <div className="text-gray-600 ">
-          <label className="block ">Jenis Kelamin</label>
-          <span className="mr-2">
+          <label className="block text-sm sm:text-base">Jenis Kelamin</label>
+          <label htmlFor="male" className="mr-2 text-xs sm:text-base">
             <input
               type="radio"
-              className="mr-1"
+              className=""
               name="jenkel"
               id="male"
-              value={gender}
-              onChange={(e) => e.target.checked && setGender('male')}
-            />
-            <label htmlFor="male">Pria</label>
-          </span>
-          <span className="mr-2">
+              value="male"
+              onChange={(e) =>
+                e.target.checked &&
+                setDataEdit({ ...dataEdit, gender: e.target.value })
+              }
+            />{' '}
+            Pria
+          </label>
+          <label htmlFor="female" className="text-xs sm:text-base">
             <input
               type="radio"
-              className="mr-1"
+              className=""
               name="jenkel"
               id="female"
-              value={gender}
-              onChange={(e) => e.target.checked && setGender('female')}
-            />
-            <label htmlFor="female">Perempuan</label>
-          </span>
+              value="female"
+              onChange={(e) =>
+                e.target.checked &&
+                setDataEdit({ ...dataEdit, gender: e.target.value })
+              }
+            />{' '}
+            Perempuan
+          </label>
         </div>
-        <div className="flex items-center w-full px-6 py-4 mb-4 bg-white rounded-full shadow-lg">
-          <FaLock className="w-5 h-5 mr-4 text-gray-600" />
+        <div className="flex items-center w-full px-4 py-2 mb-4 bg-white rounded-full shadow-lg sm:px-6 sm:py-4">
+          <FaLock className="w-3 h-3 mr-2 text-gray-600 sm:w-5 sm:h-5 sm:mr-4" />
           <input
             type={`${showPassword ? 'text' : 'password'}`}
             name="password"
-            className="text-gray-600 bg-transparent focus:outline-none"
+            className="text-sm text-gray-600 bg-transparent focus:outline-none sm:text-base"
             placeholder="Edit Password"
             value={dataEdit.password}
             style={{ flex: 1 }}
@@ -160,15 +166,15 @@ const EditProfile = ({ setDisplay }) => {
           />
           <div onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? (
-              <FaEyeSlash className="w-5 h-5 ml-4 text-gray-600 cursor-pointer" />
+              <FaEyeSlash className="w-3 h-3 ml-2 text-gray-600 sm:w-5 sm:h-5 sm:ml-4" />
             ) : (
-              <FaEye className="w-5 h-5 ml-4 text-gray-600 cursor-pointer" />
+              <FaEye className="w-3 h-3 ml-2 text-gray-600 sm:w-5 sm:h-5 sm:ml-4" />
             )}
           </div>
         </div>
         <button
           type="submit"
-          className="w-full py-2 mt-2 font-semibold text-center text-white transition-all duration-200 bg-indigo-500 rounded-full cursor-pointer hover:bg-indigo-600"
+          className="w-full py-2 mt-2 text-sm font-semibold text-center text-white transition-all duration-200 bg-indigo-500 rounded-full cursor-pointer sm:text-base hover:bg-indigo-600"
         >
           Edit
         </button>

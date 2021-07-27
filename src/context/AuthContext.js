@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useContext, createContext, useReducer, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'config/axios';
-import useSWR from 'swr';
 
 export const AuthContext = createContext();
 
@@ -37,7 +36,6 @@ const reducer = (state, action) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  // const { data: userLogin } = useSWR('/users/me');
   const router = useRouter();
   const [state, dispatch] = useReducer(reducer, {
     user: null,
@@ -73,9 +71,9 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post('/auth/logout');
+      router.push('/');
       dispatch({ type: 'LOGOUT' });
       // window.location.reload();
-      router.push('/');
     } catch (error) {
       console.log(error);
     }

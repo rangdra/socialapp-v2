@@ -69,19 +69,19 @@ const Post = ({ post, likePost, deletePost }) => {
             </Modal>
             <Modal
               content={(toggle, setDisplay) => (
-                <div className="flex flex-col items-center justify-center h-48 text-center text-gray-800">
-                  <h1 className="text-2xl">
+                <div className="flex flex-col items-center justify-center h-48 px-4 text-center text-gray-800 sm:px-0b">
+                  <h1 className="sm:text-2xl">
                     Anda yakin ingin menghapus post ?
                   </h1>
                   <div className="flex items-center mt-4 space-x-2">
                     <button
-                      className="px-4 py-2 text-sm font-bold text-white bg-red-500 rounded hover:bg-red-600"
+                      className="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded hover:bg-red-600"
                       onClick={() => deletePost(post?._id)}
                     >
                       Hapus
                     </button>
                     <button
-                      className="px-4 py-2 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-600"
+                      className="px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded hover:bg-blue-600"
                       onClick={() => setDisplay(false)}
                     >
                       Kembali
