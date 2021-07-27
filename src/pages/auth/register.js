@@ -112,7 +112,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="text-gray-600">
+              <div className="text-gray-600 sm:mb-2">
                 <label className="block text-sm sm:text-base">
                   Jenis Kelamin
                 </label>

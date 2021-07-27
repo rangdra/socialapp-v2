@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <Layout>
       <div className="grid-cols-7 gap-4 px-4 mt-8 sm:grid sm:px-20 sm:mt-12">
-        <div className="w-full sm:mb-0 mb-4 bg-white sm:h-[230px] col-span-2 p-4 text-gray-800 shadow-lg">
+        <div className="w-full sm:mb-0 mb-4 bg-white sm:h-[250px] col-span-2 p-4 text-gray-800 shadow-lg">
           {authenticated ? (
             <SidebarProfile />
           ) : (
